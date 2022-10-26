@@ -1,0 +1,7 @@
+black background and white line
+white background and black line
+random grey background and complementary line
+black background an white filled
+white background and black filled
+random grey background and complementary filled
+random background and complementary filled
