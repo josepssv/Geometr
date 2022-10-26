@@ -1,0 +1,22 @@
+equilateral triangle, in middle, leaning on one side, in circumscribed circle
+equilateral triangle in the middle leaning on a vertex, ss the play symbol, as an arrow to the left, in circumscribed circle
+equilateral triangle in the middle leaning on a vertex, ss the play symbol, as an arrow to the right, in circumscribed circle
+square in middle, leading in a size
+triangle in the cornet left top
+random equilateral triangle leading in a side
+random square leading in a side
+random equilateral triangle
+random square
+equilateral triangle leaning on the lower side of the screen
+square leaning on the lower side of the screen
+equilateral triangle grid
+circle in middle
+circle in random position
+random circles with same radius
+random circles diferent radius
+ellipse in middle, random size, 3/4 proportion
+isosceles triangle in middle
+rectangle in middle
+ellipse in middle, frame width
+n parallel lines
+n regular polygon 
