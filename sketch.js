@@ -37,10 +37,13 @@ var s4i = new Image();
 var srci = [];
 var canvas0;
 var user = "u1";
+var iurl = "imgmodel.jpg";
+var image0;
 
 let sketch0 = function (p) {
   p.preload = function () {
     modelsPosition = p.loadStrings("modelPosition.txt");
+    image0 = p.loadImage(iurl);
   };
   p.setup = function () {
     canvas0 = p.createCanvas(
@@ -48,24 +51,29 @@ let sketch0 = function (p) {
       general.h * general.scale
     );
     s0i = p.createGraphics(p.width, p.height);
+    //-->p.imageMode(p.CENTER);
+
     p.noLoop();
   };
   p.draw = function () {
     p.image(s0i, 0, 0);
+    //p.image(image0, 0, 0);
   };
 };
 var s0 = new p5(sketch0, "my0");
 var canvas1;
 let sketch1 = function (p) {
   p.setup = function () {
-    canvas1 = p.createCanvas(general.w, general.h);
+    canvas1 = p.createCanvas(general.w, general.h, p.WEBGL);
     s1i = p.createGraphics(p.width, p.height);
+    p.smooth();
     p.noLoop();
 
     //getRtriangle(1, general.w, general.h);
   };
 
   p.draw = function () {
+    p.ortho();
     /*
     var rw = p.random(p.width / 2) + 1;
     var rr = p.random(0.1);
@@ -106,13 +114,15 @@ var s1 = new p5(sketch1, "my1");
 var canvas2;
 let sketch2 = function (p) {
   p.setup = function () {
-    canvas2 = p.createCanvas(general.w, general.h);
+    canvas2 = p.createCanvas(general.w, general.h, p.WEBGL);
     //s2i = createImage(p.width, p.height);
     //getRtriangle(2, general.w, general.h);
+    p.smooth();
     p.noLoop();
   };
   p.draw = function () {
     if (doini) {
+      p.ortho();
       decideModels(0, 2);
       models(p, 2);
       s0i.image(canvas2, p.width, 0);
@@ -131,13 +141,15 @@ var s2 = new p5(sketch2, "my2");
 var canvas3;
 let sketch3 = function (p) {
   p.setup = function () {
-    canvas3 = p.createCanvas(general.w, general.h);
+    canvas3 = p.createCanvas(general.w, general.h, p.WEBGL);
     //s3i = createImage(p.width, p.height);
     //getRtriangle(3, general.w, general.h);
+    p.smooth();
     p.noLoop();
   };
 
   p.draw = function () {
+    p.ortho();
     /*
     var rw = p.random(p.width / 2) + 1;
     var rr = p.random(0.1);
@@ -168,13 +180,15 @@ var s3 = new p5(sketch3, "my3");
 var canvas4;
 let sketch4 = function (p) {
   p.setup = function () {
-    canvas4 = p.createCanvas(general.w, general.h);
+    canvas4 = p.createCanvas(general.w, general.h, p.WEBGL);
     //s4i = createImage(p.width, p.height);
     //getRtriangle(4, general.w, general.h);
+    p.smooth();
     p.noLoop();
   };
 
   p.draw = function () {
+    p.ortho();
     /* var rw = p.random(p.width / 2) + 1;
     var rr = p.random(0.1);
     var rsw = p.random(p.width / 10) + 1;
@@ -208,15 +222,18 @@ var canvasU;
 let unique = function (p) {
   p.setup = function () {
     var gene = 1;
-    canvasU = p.createCanvas(general.w * gene, general.h * gene);
+    canvasU = p.createCanvas(general.w * gene, general.h * gene, p.WEBGL);
     canvasU.mouseOut(function () {
       mode = 0;
     });
     //getU = getS[ndraw];
+    p.smooth();
     p.noLoop();
   };
 
   p.draw = function () {
+    p.ortho();
+  
     /*var rw = p.random(p.width / 2) + 1;
     rr = p.random(0.1);
     var rsw = p.random(p.width / 10) + 1;
@@ -260,7 +277,6 @@ function makeUButtons(idu) {
         ndraw = 1;
         v1.attribute("class", "touche");
         varietyU(idu);
-        
       });
     };
   };
@@ -293,6 +309,7 @@ function makeButtons(idu) {
       */
         //info(2);
         //drawGeometryBig(ndraw);
+        sUnique.clear()
         drawGeometry(sUnique, 1, 1, idu);
         showImageU(1, idu);
       });
@@ -312,6 +329,7 @@ function makeButtons(idu) {
       */
         //info(2);
         //drawGeometryBig(ndraw);
+        sUnique.clear()
         drawGeometry(sUnique, 2, 1, idu);
         showImageU(2, idu);
       });
@@ -330,9 +348,9 @@ function makeButtons(idu) {
       */
         //info(2);
         //drawGeometryBig(ndraw);
+        sUnique.clear()
         drawGeometry(sUnique, 3, 1, idu);
         showImageU(3, idu);
-        
       });
       u4 = p.createButton("u4");
       u4.parent("#" + toname);
@@ -341,7 +359,7 @@ function makeButtons(idu) {
         ndraw = 4;
         mode = 1;
         u4.attribute("class", "touche");
-        
+
         /*var gs = p.select("#groupS");
       gs.style("display", "none");
       gs.style("visibility", "hidden");
@@ -350,6 +368,7 @@ function makeButtons(idu) {
       */
         //info(2);
         //drawGeometryBig(ndraw);
+        sUnique.clear()
         drawGeometry(sUnique, 4, 1, idu);
         showImageU(4, idu);
       });
@@ -375,7 +394,7 @@ function makeButtons(idu) {
       v3.mousePressed(function () {
         ndraw = 3;
         variety(3);
-         v3.attribute("class", "touche");
+        v3.attribute("class", "touche");
       });
       v4 = p.createButton("v4");
       v4.parent("#" + toname);
@@ -384,7 +403,7 @@ function makeButtons(idu) {
         variety(4);
         v4.attribute("class", "touche");
       });
-      
+
       divi = p.createDiv("");
       //setTimeout(compose1, 500);
       //info(1);
@@ -413,16 +432,18 @@ var idata;
 
 let sfooter = function (p) {
   p.setup = function () {
-    p.createCanvas(200, 15);
-
+    p.noCanvas()
+    var plusdiv=p.createSpan("")
+    //plusdiv.style("height","35px")
+    plusdiv.html('<span class="dot" style="position:relative;top:9px;height:30px;width:30px;padding:0px;"><span style="position:absolute;top:5px;left:5px;font-size:14px;">➕</span></span>')
     idata = p.createInput("");
-    idata.style("background-color:#ddd;");
+    idata.style("background-color","#ddd;");
     idata.style("width", "80%");
     idata.style("height", "28px");
-    idata.style("padding-left", "13px");
+    idata.style("padding-left", "12px");
     idata.style("margin-top", "0px");
     idata.attribute("id", "idata");
-    idata.attribute("placeholder","Write your gometry here")
+    idata.attribute("placeholder", "Write your gometry here");
     idata.parent("#footer");
     idata.changed(function () {
       if (p.keyCode == p.ENTER) {
@@ -434,7 +455,7 @@ let sfooter = function (p) {
       }
     });
     var sendidata = p.createButton("submit");
-    sendidata.style("margin-top", "0px")
+    sendidata.style("margin-top", "0px");
     sendidata.parent("#footer");
     sendidata.mousePressed(function () {
       doini = true;
@@ -496,13 +517,18 @@ function varietyU(idu) {
 
   //getS[3] = { ...etS };
   getS[3] = JSON.parse(JSON.stringify(etS));
-  getS[3].interior = "" + parseInt(Math.random() * 6 + 1) + "cirrcc"; 
+  getS[3].interior = "" + parseInt(Math.random() * 6 + 1) + "cirrcc";
   getS[3].n = 3;
-  
+
   //getS[4] = { ...etS };
   getS[4] = JSON.parse(JSON.stringify(etS));
   getS[4].interior = "" + parseInt(Math.random() * 24 + 1) + "rriicc";
   getS[4].n = 4;
+  s0.clear();
+  s1.clear();
+  s2.clear();
+  s3.clear();
+  s4.clear();
   modelPosition = gets.modelPosition;
   modelColor = gets.modelColor;
   models(s1, 1);
@@ -596,7 +622,7 @@ function putGeo(
   geo,
   interior,
   contour,
-  exterior
+  exterior,  bgmode, clipp
 ) {
   var rw = w;
   getS[n] = {
@@ -619,7 +645,7 @@ function putGeo(
     geo: geo,
     interior: interior,
     contour: contour,
-    exterior: exterior,
+    exterior: exterior,  bgmode: bgmode, clipp: clipp 
   };
 }
 
@@ -637,8 +663,12 @@ function drawGeometry(p, n, s, idu) {
   if (idu === "") {
     etS = JSON.parse(JSON.stringify(getS[n]));
   } else {
-   //index = srci.findIndex(function (item, i) {  return item.idu === idu;   });
-    index = srci.map(function(d) { return d['idu']; }).indexOf(idu)
+    //index = srci.findIndex(function (item, i) {  return item.idu === idu;   });
+    index = srci
+      .map(function (d) {
+        return d["idu"];
+      })
+      .indexOf(idu);
     etS = JSON.parse(JSON.stringify(srci[index].gets[n]));
   }
   //console.log(index+' '+n+" " + JSON.stringify(etS));
@@ -657,9 +687,31 @@ function drawGeometry(p, n, s, idu) {
   var interior = etS.interior;
   var contour = etS.contour;
   var exterior = etS.exterior;
-
-  p.rectMode(p.CENTER);
-  p.background(c1);
+   var bgmode = etS.bgmode;//p.int(p.random(3)); 
+   var clipx = etS.clipp.x;//.p.random(1);
+   var clipy = etS.clipp.y;//p.random(1);
+   var clipmodul= etS.clipp.m;//;p.random(1);
+  if (bgmode == 0) {
+    p.background(c1);
+  } else {
+    p.rectMode(p.CENTER);
+    p.textureMode(p.NORMAL);
+   
+    p.noStroke();
+    if (bgmode == 2) {
+      p.texture(image0);
+    }
+    p.beginShape();
+    if (bgmode == 1) p.fill(c1);
+    p.vertex(-p.width, -p.height, clipx ,  clipy);
+    if (bgmode == 1) p.fill(c2);
+    p.vertex(p.width, -p.height, clipx + clipmodul, clipy);
+    if (bgmode == 1) p.fill(c1);
+    p.vertex(p.width, p.height, clipx + clipmodul,  clipy+clipmodul);
+    if (bgmode == 1) p.fill(c3);
+    p.vertex(-p.width, p.height, clipx ,  clipy+clipmodul);
+    p.endShape(p.CLOSE);
+  }
   if (fills) {
     p.fill(c2);
   } else {
@@ -676,7 +728,8 @@ function drawGeometry(p, n, s, idu) {
     p.noStroke();
   }
   p.push();
-  p.translate(p.width / 2, p.height / 2);
+  //p.translate(p.width / 2, p.height / 2);
+
   if (!Array.isArray(pw)) {
     p.translate(pw * s, ph * s);
   }
@@ -701,6 +754,18 @@ function drawGeometry(p, n, s, idu) {
   ];
   var sizex = 1;
   var sizey = 1;
+  /* var cameraPos = p.createVector(0, 2, -124)
+  p.camera=cameraPos
+  p.push()
+  //p.rotate.x=p.random(1)
+  p.rotate.x=p.random(40)
+  p.fill(233, 11, 22);
+  ambientMaterial(250);
+    torus(80,20,64,64);
+   p.torus(100, 40, 5 );
+  p.pop()
+  */
+
   if (geo == "triangle" || geo == "triangle line" || geo == "triangle grid") {
     if (geo == "triangle grid") {
       sizex = 24;
@@ -858,6 +923,8 @@ function drawGeometry(p, n, s, idu) {
     if (nn2 > 2) {
       var proporb = (p.PI * 2) / nn2;
       var iac3 = 0;
+      // iim=true
+      //if(iim) p.texture(image0);
       p.beginShape();
       for (var mm = 0; mm <= nn2; mm++) {
         p.vertex((w / 2) * p.cos(iac3), (w / 2) * p.sin(iac3));
@@ -1030,6 +1097,10 @@ function models(p, n) {
   var exterior = "0";
 
   var geo = "triangle";
+  var bgmode=p.int(p.random(3))
+  var clipp={x:p.random(),y:p.random(),m:p.random()}
+  
+  
   contloop++;
   //if(contloop>2){contloop=0;noBackground=true}
 
@@ -1070,7 +1141,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 1) {
@@ -1098,7 +1169,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 2) {
@@ -1127,7 +1198,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
 
@@ -1157,7 +1228,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
 
@@ -1189,7 +1260,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 5) {
@@ -1221,7 +1292,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 6) {
@@ -1250,7 +1321,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 7) {
@@ -1280,7 +1351,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 8) {
@@ -1310,7 +1381,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 9) {
@@ -1337,7 +1408,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 10) {
@@ -1369,7 +1440,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
 
@@ -1400,7 +1471,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 12) {
@@ -1430,7 +1501,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 13) {
@@ -1460,7 +1531,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 14) {
@@ -1490,7 +1561,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 15) {
@@ -1518,7 +1589,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 16) {
@@ -1548,7 +1619,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 17) {
@@ -1580,7 +1651,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 18) {
@@ -1608,7 +1679,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 19) {
@@ -1635,7 +1706,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 20) {
@@ -1662,7 +1733,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 21) {
@@ -1691,7 +1762,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 22) {
@@ -1719,7 +1790,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   if (modelPosition == 23) {
@@ -1747,7 +1818,7 @@ function models(p, n) {
       geo,
       interior,
       contour,
-      exterior
+      exterior,  bgmode, clipp
     );
   }
   ////////////////////
@@ -1829,13 +1900,13 @@ function models(p, n) {
 
   ///////////////
 }
-function fdate(ut){
-//var date = new Date(ut) * 1000);
-var di = new Date(parseInt(ut))
-var dj= di.toLocaleString(); 
-var d=dj.split(',')
-//return d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear() 
-  return d[0]
+function fdate(ut) {
+  //var date = new Date(ut) * 1000);
+  var di = new Date(parseInt(ut));
+  var dj = di.toLocaleString();
+  var d = dj.split(",");
+  //return d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear()
+  return d[0];
 }
 function getColorwrited() {
   //get if text a writed a color
@@ -1990,18 +2061,29 @@ function toBottom(idu) {
   document.body.scrollTop = yScroll;
 }
 
-
 function showImage(idu) {
   var cus = canvas0.elt.toDataURL();
   var gets = getS.slice();
-  var wp=gets[1].word
+  var wp = gets[1].word;
   srci.push({ idu: idu, gets: gets });
-  
-  var dd=idu.split('-')
-  var ddd=fdate(dd[1])
+
+  var dd = idu.split("-");
+  var ddd = fdate(dd[1]);
   //console.log(idu+' '+dd[1])
   var cad =
-    '<div class="block2" ><div id="wu-'+idu+'" class="infoImageUup"> '+user+': '+ddd+'</div><div id="w-'+idu+'" class="infoImageUp"> '+''+' '+wp+'</div><img id="' +
+    '<div class="block2" ><div id="wu-' +
+    idu +
+    '" class="infoImageUup"> ' +
+    user +
+    ": " +
+    ddd +
+    '</div><div id="w-' +
+    idu +
+    '" class="infoImageUp"> ' +
+    "" +
+    " " +
+    wp +
+    '</div><img id="' +
     idu +
     '" src="' +
     cus +
@@ -2019,7 +2101,7 @@ function showImage(idu) {
   var sei = s0.select("#flow");
   sei.html(cad, 1);
   makeButtons(idu);
-  
+
   //console.log(src)
   toBottom(idu);
 }
@@ -2028,21 +2110,33 @@ function showImageU(ndraw, idu) {
   index = srci.findIndex(function (item, i) {
     return item.idu === idu;
   });
-
+  
   var cus = canvasU.elt.toDataURL();
   //var tm = new Date().getTime();
   //var idu = user + "-" + tm;
-  idu=makeIdu()
+  idu = makeIdu();
   //var gets = { ...srci[index].gets[ndraw] };
   var gets = JSON.parse(JSON.stringify(srci[index].gets[ndraw]));
-  
+
   srci.push({ idu: idu, gets: gets });
-  var wp=gets.word
+  var wp = gets.word;
   srci.push({ idu: idu, gets: gets });
-  var dd=idu.split('-')
-  var ddd=fdate(dd[1])
+  var dd = idu.split("-");
+  var ddd = fdate(dd[1]);
   var cad =
-    '<div class="block2" ><div id="wu-'+idu+'" class="infoImageUup"> '+user+': '+ddd+'</div><div id="w-'+idu+'" class="infoImageUp"> '+''+' '+wp+'</div><img id="' +
+    '<div class="block2" ><div id="wu-' +
+    idu +
+    '" class="infoImageUup"> ' +
+    user +
+    ": " +
+    ddd +
+    '</div><div id="w-' +
+    idu +
+    '" class="infoImageUp"> ' +
+    "" +
+    " " +
+    wp +
+    '</div><img id="' +
     idu +
     '" src="' +
     cus +
@@ -2091,6 +2185,7 @@ function compose1(idu) {
   u.style("display", "none");
   */
   setTimeout(function () {
+    
     compose2(idu);
   }, 1000);
 }
@@ -2133,6 +2228,12 @@ function compose2(idu) {
   //p.noLoop()
 
   //models(sketch4);
+  s0.clear();
+  s1.clear();
+  s2.clear();
+  s3.clear();
+  s4.clear();
+
   s1.noLoop();
   s2.noLoop();
   s3.noLoop();
@@ -2179,5 +2280,6 @@ function info(n) {
   if (n == 2) {
     divi.html(JSON.stringify(getS[ndraw]));
   }
-
-} 
+  //showdata(ndraw)
+  //+ modelPosition);
+} //dads
