@@ -449,7 +449,7 @@ let sfooter = function (p) {
   p.setup = function () {
     p.noCanvas()
     inputImage = p.createFileInput(handleImg);
-    //inputImage.style('display','none');
+    //inputImage.style('cursor','pointer');
     inputImage.hide()
     var plusdiv=p.createSpan("")
     //plusdiv.style("height","35px")
@@ -620,6 +620,7 @@ function getRtriangle(n, w, h) {
     r: rr,
     pw: rpw,
     ph: rph,
+    v1:v1,v2:v2,
     sw: rsw,
     fills: true,
     strokes: 1,
@@ -635,7 +636,7 @@ function putGeo(
   w,
   h,
   rpw,
-  rph,
+  rph,v1,v2,
   fills,
   strokes,
   rr,
@@ -659,6 +660,7 @@ function putGeo(
     r: rr,
     pw: rpw,
     ph: rph,
+    v1:v1,v2:v2,
     sw: strokes,
     fills: fills,
     strokes: strokes,
@@ -700,6 +702,8 @@ function drawGeometry(p, n, s, idu) {
   var rh = etS.h;
   var pw = etS.pw;
   var ph = etS.ph;
+  var v1=etS.v1
+  var v2=etS.v2
   var r = etS.r;
   var fills = etS.fills;
   var strokes = etS.strokes;
@@ -937,7 +941,23 @@ function drawGeometry(p, n, s, idu) {
       }
     }
   }
-
+ if (geo.includes("intersection ")) {
+    var nn1 = geo.split(" ");
+    var nn2 = parseInt(nn1[1]);
+    if (nn2 == 2) {
+      p.stroke(0)
+      var hit = p.collideLineLine(v1.x1,v1.y1,v1.x2,v1.y2, v2.x1,v2.y1,v2.x2,v2.y2, true);
+      //console.log(hit)
+      // (hit ? p.color('red') : p.color('#000'));
+      p.circle(hit.x, hit.y, w);
+      p.strokeWeight(4)
+      p.line(v1.x1,v1.y1,v1.x2,v1.y2)
+      p.line(v2.x1,v2.y1,v2.x2,v2.y2)
+      
+      
+    }
+  }
+  
   if (geo.includes("polygon ")) {
     var nn1 = geo.split(" ");
     var nn2 = parseInt(nn1[1]);
@@ -1120,7 +1140,8 @@ function models(p, n) {
   var geo = "triangle";
   var bgmode=p.int(p.random(3))
   var clipp={x:p.random(),y:p.random(),m:p.random()}
-  
+  var v1=0
+  var v2=0
   
   contloop++;
   //if(contloop>2){contloop=0;noBackground=true}
@@ -1154,7 +1175,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1182,7 +1203,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1211,7 +1232,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1241,7 +1262,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1273,7 +1294,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1305,7 +1326,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1334,7 +1355,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1364,7 +1385,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1394,7 +1415,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1421,7 +1442,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1453,7 +1474,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1484,7 +1505,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1514,7 +1535,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1544,7 +1565,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1574,7 +1595,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1602,7 +1623,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1632,7 +1653,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1664,7 +1685,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1692,7 +1713,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1719,7 +1740,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1746,7 +1767,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1775,7 +1796,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1803,7 +1824,7 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1831,7 +1852,38 @@ function models(p, n) {
       rw,
       rh,
       rpw,
-      rph,
+      rph,v1,v2,
+      fills,
+      strokes,
+      rr,
+      ar,
+      geo,
+      interior,
+      contour,
+      exterior,  bgmode, clipp
+    );
+  }
+   if (modelPosition == 24) {
+    //intersection of two segments
+     rpw = -p.width/2;
+    rph = -p.height/2;
+      rr = 0;
+    var prh1=p.random(p.height)
+    var prw1=p.random(p.width)
+     var prh2=p.random(p.height)
+    var prw2=p.random(p.width)
+    v1 = {x1:0,y1:prh1,x2:p.width,y2:prh2};
+    v2 = {x1:prw1,y1:0,x2:prw2,y2:p.height};
+    geo = "intersection 2";
+    putGeo(
+      n,
+      rc1,
+      rc2,
+      rc3,
+      rw,
+      rh,
+      rpw,
+      rph,v1,v2,
       fills,
       strokes,
       rr,
@@ -1990,7 +2042,7 @@ function decideModels(count, n) {
   var iphrase = idata.value();
   if (iphrase == "write your geometry" || iphrase == "") {
     modelPosition = parseInt(Math.random() * (maxModel + 1));
-    // modelPositon=maxModel
+    //-->modelPosition=24
     //console.log("no writed");
     //console.log(srci);
     return true;
