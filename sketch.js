@@ -428,14 +428,35 @@ function makeIdu() {
 }
 //-----------
 
+function handleImg(file) {
+  if (file.type === "image") {
+      iurl2 = sFooter.loadImage(file.data, (iurl2) => {
+        image0=iurl2
+        inputImage.hide()
+      
+    });
+  }
+}
+
+
+
+
+
 var idata;
+var inputImage
 
 let sfooter = function (p) {
   p.setup = function () {
     p.noCanvas()
+    inputImage = p.createFileInput(handleImg);
+    //inputImage.style('display','none');
+    inputImage.hide()
     var plusdiv=p.createSpan("")
     //plusdiv.style("height","35px")
     plusdiv.html('<span class="dot" style="position:relative;top:9px;height:30px;width:30px;padding:0px;"><span style="position:absolute;top:5px;left:5px;font-size:14px;">➕</span></span>')
+    plusdiv.mousePressed(function () {
+      inputImage.show()
+    })
     idata = p.createInput("");
     idata.style("background-color","#ddd;");
     idata.style("width", "80%");
