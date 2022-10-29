@@ -37,3 +37,11 @@ canvas {
 }
 .infoImageUup{ text-align:left; margin-bottom:12px;font-size:10px; font-family: Courier;}
 .infoImageUp{ text-align:left; margin-bottom:40px;font-size:12px; font-family: Courier;}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
